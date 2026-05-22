@@ -116,6 +116,16 @@
             margin-bottom: 20px;
         }
 
+        /* Diseño para tarjetas con estructura vertical (Valentina) */
+        .app-info-vertical {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
         .app-icon {
             width: 85px;
             height: 85px;
@@ -127,6 +137,23 @@
             justify-content: center;
             flex-shrink: 0;
             overflow: hidden;
+        }
+
+        /* Contenedor especial adaptado para el tamaño completo del GIF vertical */
+        .app-gif-container {
+            width: 100%;
+            height: 320px;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .app-gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .app-icon img {
@@ -159,6 +186,12 @@
             list-style: none;
             margin-bottom: 25px;
             padding-left: 5px;
+        }
+
+        .app-features.centered-list {
+            padding-left: 0;
+            display: inline-block;
+            text-align: left;
         }
 
         .app-features li {
@@ -195,19 +228,6 @@
             box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
             transform: scale(1.01);
             color: #ffffff;
-        }
-
-        .btn-upcoming {
-            background: #1e293b;
-            color: #64748b;
-            border: 1px dashed rgba(255,255,255,0.1);
-            padding: 14px 20px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: not-allowed;
-            text-align: center;
-            width: 100%;
         }
 
         .modal-overlay {
@@ -333,22 +353,25 @@
 
         <div class="app-card">
             <div>
-                <div class="app-info-layout">
-                    <div class="app-icon">
-                        <img src="sketch1779475424832.png" alt="Valentina" onerror="this.parentElement.innerHTML='👗'">
+                <div class="app-info-vertical">
+                    <div class="app-gif-container">
+                        <img src="Valentina.gif" alt="Valentina Animada" onerror="this.parentElement.innerHTML='👗'">
                     </div>
+                    
                     <div class="app-text-content">
                         <h2 class="app-title">Valentina: Diseños de Papel</h2>
-                        <p class="app-description">¡Ya disponible! Colecciona, viste y combina outfits increíbles para tu muñeca virtual con designs exclusivos creados por mí.</p>
+                        <p class="app-description">¡Ya disponible! Colecciona, viste y combina outfits increíbles para tu muñeca virtual con diseños exclusivos creados por mí.</p>
                     </div>
                 </div>
 
-                <ul class="app-features">
-                    <li>Estilo de muñecas de papel tradicional.</li>
-                    <li>Decenas de prendas, vestidos y accesorios.</li>
-                    <li>Guarda tus combinaciones favoritas en el celular.</li>
-                    <li>Gráficos adorables optimizados para todo móvil.</li>
-                </ul>
+                <div style="text-align: center;">
+                    <ul class="app-features centered-list">
+                        <li>Estilo de muñecas de papel tradicional.</li>
+                        <li>Decenas de prendas, vestidos y accesorios.</li>
+                        <li>Guarda tus combinaciones favoritas en el celular.</li>
+                        <li>Gráficos adorables optimizados para todo móvil.</li>
+                    </ul>
+                </div>
             </div>
             <button class="btn-download" onclick="abrirContenedorAnuncio('PON_AQUÍ_EL_LINK_DE_DRIVE_DE_VALENTINA')">DESCARGAR APK</button>
         </div>
@@ -379,7 +402,6 @@
         let cuentaRegresiva;
         let segundos = 5;
 
-        // 🚀 TU SMART LINK DE MONETAG (ZONA 11035523)
         const URL_SMARTLINK_MONETAG = "https://omg10.com/4/11035523"; 
 
         const adModal = document.getElementById('adModal');
@@ -398,5 +420,15 @@
             cuentaRegresiva = setInterval(() => {
                 segundos--;
                 if (segundos > 0) {
-                    btnContinue
-        
+                    btnContinue.innerText = `Por favor espera (${segundos}s)`;
+                } else {
+                    clearInterval(cuentaRegresiva);
+                    btnContinue.disabled = false;
+                    btnContinue.classList.add('ready');
+                    btnContinue.innerText = "Ir a la Descarga";
+                }
+            }, 1000);
+        }
+
+        btnContinue.
+            
