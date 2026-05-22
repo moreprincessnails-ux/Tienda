@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Aplicaciones Mágicas</title>
+    
+    <script>(function(s){s.dataset.zone='11039096',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+    <script>(function(s){s.dataset.zone='11039097',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+    <style>
+        :root {
+            --bg-principal: #0b0f19;
+            --bg-gradiente: radial-gradient(circle at 50% 10%, #1e293b 0%, #0f172a 50%, #020617 100%);
+            --neon-cian: #00f2fe;
+            --neon-azul: #0077ff;
+            --texto-principal: #f8fafc;
+            --texto-secundario: #94a3b8;
+            --glass-bg: rgba(30, 41, 59, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-principal);
+            background-image: var(--bg-gradiente);
+            color: var(--texto-principal);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before, body::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--neon-azul);
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: 0;
+        }
+        body::before { top: 10%; left: 10%; background: var(--neon-cian); }
+        body::after { bottom: 15%; right: 10%; }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.6), 0 0 20px rgba(0, 242, 254, 0.3);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--neon-cian);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .apps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 35px;
+            width: 100%;
+            max-width: 900px;
+            z-index: 10;
+        }
+
+        .app-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.15), 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .app-info-layout {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .app-icon {
+            width: 85px;
+            height: 85px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-text-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .app-description {
+            font-size: 0.95rem;
+            color: var(--texto-secundario);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .app-features {
+            list-style: none;
+            margin-bottom: 25px;
+            padding-left: 5px;
+        }
+
+        .app-features li {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .app-features li::before {
+            content: "✨";
+            font-size: 0.9rem;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, var(--neon-cian) 0%, var(--neon-azul) 100%);
+            color: #020617;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-download:hover {
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+            transform: scale(1.01);
+            color: #ffffff;
+        }
+
+        .btn-upcoming {
+            background: #1e293b;
+            color: #64748b;
+            border: 1px dashed rgba(255,255,255,0.1);
+            padding: 14px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: not-allowed;
+            text-align: center;
+            width: 100%;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px;
+            border-radius: 28px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+        }
+
+        .modal-content h3 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            color: var(--texto-secundario);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .ad-container-zone {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            margin: 20px 0;
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-continue {
+            background-color: #374151;
+            color: #9ca3af;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 30px;
+            cursor: not-allowed;
+            font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-continue.ready {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: #052e16;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-continue.ready:hover {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+            color: #ffffff;
+        }
+
+        footer {
+            margin-top: 60px;
+            color: #475569;
+            font-size: 0.85rem;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mis Aplicaciones</h1>
+        <p>Universo Creativo ✨</p>
+    </header>
+
+    <main class="apps-container">
+
+        <div class="app-card">
+            <div>
+                <div class="app-info-layout">
+                    <div class="app-icon">
+                        <img src="icono-auramx.png" alt="AuraMx" onerror="this.parentElement.innerHTML='🎵'">
+                    </div>
+                    <div class="app-text-content">
+                        <h2 class="app-title">AuraMx: Reproductor</h2>
+                        <p class="app-description">¡Lleva tu experiencia musical al siguiente nivel con AuraMx! Disfruta de una interfaz fluida y potente diseñada a tu medida.</p>
+                    </div>
+                </div>
+                
+                <ul class="app-features">
+                    <li>Máxima calidad de sonido optimizada.</li>
+                    <li>Organiza tus canciones favoritas fácilmente.</li>
+                    <li>Crea listas de reproducción personalizadas.</li>
+                    <li>Navegación intuitiva que se adapta a tu estilo.</li>
+                </ul>
+            </div>
+            <button class="btn-download" onclick="abrirContenedorAnuncio('PON_AQUÍ_EL_LINK_DE_DRIVE_DE_AURAMX')">DESCARGAR APK</button>
+        </div>
+
+        <div class="app-card">
+            <div>
+                <div class="app-info-layout">
+                    <div class="app-icon" style="font-size: 2.2rem; display: flex; align-items: center; justify-content: center;">👗</div>
+                    <div class="app-text-content">
+                        <h2 class="app-title">Valentina: Diseños de Papel</h2>
+                        <p class="app-description">¡Ya disponible! Colecciona, viste y combina outfits increíbles para tu muñeca virtual con diseños exclusivos creados por mí.</p>
+                    </div>
+                </div>
+
+                <ul class="app-features">
+                    <li>Estilo de muñecas de papel tradicional.</li>
+                    <li>Decenas de prendas, vestidos y accesorios.</li>
+                    <li>Guarda tus combinaciones favoritas en el celular.</li>
+                    <li>Gráficos adorables optimizados para todo móvil.</li>
+                </ul>
+            </div>
+            <button class="btn-download" onclick="abrirContenedorAnuncio('PON_AQUÍ_EL_LINK_DE_DRIVE_DE_VALENTINA')">DESCARGAR APK</button>
+        </div>
+
+    </main>
+
+    <div class="modal-overlay" id="adModal">
+        <div class="modal-content">
+            <h3>Preparando tu enlace...</h3>
+            <p>Espera un momento mientras verificamos los servidores de descarga.</p>
+            
+            <div class="ad-container-zone">
+                <div style="font-size: 0.85rem; color: var(--texto-secundario); padding: 10px;">
+                    🛡️ Enlace de descarga verificado y protegido contra virus.
+                </div>
+            </div>
+
+            <button id="btnContinue" class="btn-continue" disabled>Por favor espera (5s)</button>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 Distribución Directa
+    </footer>
+
+    <script>
+        let urlDescargaFinal = "";
+        let cuentaRegresiva;
+        let segundos = 5;
+
+        // 🚀 TU SMART LINK DE MONETAG (ZONA 11035523)
+        const URL_SMARTLINK_MONETAG = "https://omg10.com/4/11035523"; 
+
+        const adModal = document.getElementById('adModal');
+        const btnContinue = document.getElementById('btnContinue');
+
+        function abrirContenedorAnuncio(urlDestino) {
+            urlDescargaFinal = urlDestino;
+            segundos = 5;
+            
+            btnContinue.disabled = true;
+            btnContinue.classList.remove('ready');
+            btnContinue.innerText = `Por favor espera (${segundos}s)`;
+            
+            adModal.classList.add('active');
+
+            cuentaRegresiva = setInterval(() => {
+                segundos--;
+                if (segundos > 0) {
+                    btnContinue.innerText = `Por favor espera (${segundos}s)`;
+                } else {
+                    clearInterval(cuentaRegresiva);
+                    btnContinue.disabled = false;
+                    btnContinue.classList.add('ready');
+                    btnContinue.innerText = "Ir a la Descarga";
+                }
+            }, 1000);
+        }
+
+        btnContinue.addEventListener('click', () => {
+            if (!btnContinue.disabled) {
+                adModal.classList.remove('active');
+                
+                if (URL_SMARTLINK_MONETAG !== "") {
+                    window.open(URL_SMARTLINK_MONETAG, '_blank');
+                }
+                
+                window.location.href = urlDescargaFinal;
+            }
+        });
+    </script>
+
+</body>
+</html>
