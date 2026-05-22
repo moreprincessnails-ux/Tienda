@@ -109,14 +109,7 @@
             box-shadow: 0 0 30px rgba(0, 242, 254, 0.15), 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
-        .app-info-layout {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-
-        /* Diseño para tarjetas con estructura vertical (Valentina) */
+        /* Diseño unificado vertical para ambas aplicaciones */
         .app-info-vertical {
             display: flex;
             flex-direction: column;
@@ -126,20 +119,6 @@
             width: 100%;
         }
 
-        .app-icon {
-            width: 85px;
-            height: 85px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
-
-        /* Contenedor especial adaptado para el tamaño completo del GIF vertical */
         .app-gif-container {
             width: 100%;
             height: 320px;
@@ -151,12 +130,6 @@
         }
 
         .app-gif-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .app-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -185,10 +158,6 @@
         .app-features {
             list-style: none;
             margin-bottom: 25px;
-            padding-left: 5px;
-        }
-
-        .app-features.centered-list {
             padding-left: 0;
             display: inline-block;
             text-align: left;
@@ -331,9 +300,9 @@
 
         <div class="app-card">
             <div>
-                <div class="app-info-layout">
-                    <div class="app-icon">
-                        <img src="icono-auramx.png" alt="AuraMx" onerror="this.parentElement.innerHTML='🎵'">
+                <div class="app-info-vertical">
+                    <div class="app-gif-container">
+                        <img src="AuraMx.gif" alt="AuraMx Animada" onerror="this.parentElement.innerHTML='🎵'">
                     </div>
                     <div class="app-text-content">
                         <h2 class="app-title">AuraMx: Reproductor</h2>
@@ -341,12 +310,14 @@
                     </div>
                 </div>
                 
-                <ul class="app-features">
-                    <li>Máxima calidad de sonido optimizada.</li>
-                    <li>Organiza tus canciones favoritas fácilmente.</li>
-                    <li>Crea listas de reproducción personalizadas.</li>
-                    <li>Navegación intuitiva que se adapta a tu estilo.</li>
-                </ul>
+                <div style="text-align: center;">
+                    <ul class="app-features">
+                        <li>Máxima calidad de sonido optimizada.</li>
+                        <li>Organiza tus canciones favoritas fácilmente.</li>
+                        <li>Crea listas de reproducción personalizadas.</li>
+                        <li>Navegación intuitiva que se adapta a tu estilo.</li>
+                    </ul>
+                </div>
             </div>
             <button class="btn-download" onclick="abrirContenedorAnuncio('PON_AQUÍ_EL_LINK_DE_DRIVE_DE_AURAMX')">DESCARGAR APK</button>
         </div>
@@ -357,15 +328,14 @@
                     <div class="app-gif-container">
                         <img src="Valentina.gif" alt="Valentina Animada" onerror="this.parentElement.innerHTML='👗'">
                     </div>
-                    
                     <div class="app-text-content">
-                        <h2 class="app-title">Valentina: Diseños de Papel</h2>
+                        <h2 class="app-title">Campanita: Diseños de Papel</h2>
                         <p class="app-description">¡Ya disponible! Colecciona, viste y combina outfits increíbles para tu muñeca virtual con diseños exclusivos creados por mí.</p>
                     </div>
                 </div>
 
                 <div style="text-align: center;">
-                    <ul class="app-features centered-list">
+                    <ul class="app-features">
                         <li>Estilo de muñecas de papel tradicional.</li>
                         <li>Decenas de prendas, vestidos y accesorios.</li>
                         <li>Guarda tus combinaciones favoritas en el celular.</li>
@@ -430,5 +400,18 @@
             }, 1000);
         }
 
-        btnContinue.
-            
+        btnContinue.addEventListener('click', () => {
+            if (!btnContinue.disabled) {
+                adModal.classList.remove('active');
+                
+                if (URL_SMARTLINK_MONETAG !== "") {
+                    window.open(URL_SMARTLINK_MONETAG, '_blank');
+                }
+                
+                window.location.href = urlDescargaFinal;
+            }
+        });
+    </script>
+
+</body>
+</html>
