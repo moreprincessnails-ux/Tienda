@@ -334,10 +334,12 @@
         <div class="app-card">
             <div>
                 <div class="app-info-layout">
-                    <div class="app-icon" style="font-size: 2.2rem; display: flex; align-items: center; justify-content: center;">👗</div>
+                    <div class="app-icon">
+                        <img src="sketch1779475424832.png" alt="Valentina" onerror="this.parentElement.innerHTML='👗'">
+                    </div>
                     <div class="app-text-content">
                         <h2 class="app-title">Valentina: Diseños de Papel</h2>
-                        <p class="app-description">¡Ya disponible! Colecciona, viste y combina outfits increíbles para tu muñeca virtual con diseños exclusivos creados por mí.</p>
+                        <p class="app-description">¡Ya disponible! Colecciona, viste y combina outfits increíbles para tu muñeca virtual con designs exclusivos creados por mí.</p>
                     </div>
                 </div>
 
@@ -396,28 +398,5 @@
             cuentaRegresiva = setInterval(() => {
                 segundos--;
                 if (segundos > 0) {
-                    btnContinue.innerText = `Por favor espera (${segundos}s)`;
-                } else {
-                    clearInterval(cuentaRegresiva);
-                    btnContinue.disabled = false;
-                    btnContinue.classList.add('ready');
-                    btnContinue.innerText = "Ir a la Descarga";
-                }
-            }, 1000);
-        }
-
-        btnContinue.addEventListener('click', () => {
-            if (!btnContinue.disabled) {
-                adModal.classList.remove('active');
-                
-                if (URL_SMARTLINK_MONETAG !== "") {
-                    window.open(URL_SMARTLINK_MONETAG, '_blank');
-                }
-                
-                window.location.href = urlDescargaFinal;
-            }
-        });
-    </script>
-
-</body>
-</html>
+                    btnContinue
+        
