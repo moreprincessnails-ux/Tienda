@@ -35,30 +35,29 @@
             padding: 40px 20px;
         }
 
-        /* ... (mantén el resto de tus estilos CSS intactos) ... */
-        .apps-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 35px; width: 100%; max-width: 900px; z-index: 10; }
-        .app-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 30px; backdrop-filter: blur(12px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); }
-        .btn-download { background: linear-gradient(135deg, var(--neon-cian) 0%, var(--neon-azul) 100%); color: #020617; border: none; padding: 14px 20px; border-radius: 30px; font-weight: 700; cursor: pointer; width: 100%; transition: all 0.3s ease; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.8); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; z-index: 1000; }
+        .apps-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 35px; width: 100%; max-width: 900px; }
+        .app-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 30px; backdrop-filter: blur(12px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); text-align: center; }
+        .btn-download { background: linear-gradient(135deg, var(--neon-cian) 0%, var(--neon-azul) 100%); color: #020617; border: none; padding: 14px 20px; border-radius: 30px; font-weight: 700; cursor: pointer; width: 100%; transition: all 0.3s ease; margin-top: 20px; }
+        
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; z-index: 1000; transition: opacity 0.3s ease; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .btn-continue { background-color: #374151; color: #9ca3af; border: none; padding: 14px 20px; border-radius: 30px; cursor: not-allowed; width: 100%; }
+        .modal-content { background: #111827; padding: 35px; border-radius: 28px; max-width: 420px; width: 90%; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        .btn-continue { background-color: #374151; color: #9ca3af; border: none; padding: 14px 20px; border-radius: 30px; cursor: not-allowed; width: 100%; font-weight: 700; }
         .btn-continue.ready { background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%); color: #052e16; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Yadila Developers</h1>
-    </header>
+    <header style="margin-bottom: 50px;"><h1>Yadila Developers</h1></header>
 
     <main class="apps-container">
         <div class="app-card">
-            <h2 class="app-title">AuraMx: Reproductor</h2>
+            <h2>AuraMx: Reproductor</h2>
             <button class="btn-download" onclick="abrirContenedorAnuncio('https://apkpure.com/p/com.yadila.reproductor')">DESCARGAR APK</button>
         </div>
-
         <div class="app-card">
-            <h2 class="app-title">Valentina: Diseños de Papel</h2>
+            <h2>Valentina: Diseños de Papel</h2>
             <button class="btn-download" onclick="abrirContenedorAnuncio('https://apkpure.com/p/com.yadila.valentina')">DESCARGAR APK</button>
         </div>
     </main>
@@ -66,33 +65,33 @@
     <div class="modal-overlay" id="adModal">
         <div class="modal-content">
             <h3>Preparando tu enlace...</h3>
+            <a id="linkDescargaReal" href="#" target="_blank" style="display:none;"></a>
             <button id="btnContinue" class="btn-continue" disabled>Por favor espera (5s)</button>
         </div>
     </div>
 
     <script>
         let urlDescargaFinal = "";
-        let segundos = 5;
         const URL_SMARTLINK_MONETAG = "https://omg10.com/4/11035523"; 
 
         function abrirContenedorAnuncio(urlDestino) {
             urlDescargaFinal = urlDestino;
-            segundos = 5;
-            const btnContinue = document.getElementById('btnContinue');
-            btnContinue.disabled = true;
-            btnContinue.classList.remove('ready');
-            btnContinue.innerText = `Por favor espera (${segundos}s)`;
+            let segundos = 5;
+            const btn = document.getElementById('btnContinue');
+            btn.disabled = true;
+            btn.classList.remove('ready');
+            btn.innerText = `Por favor espera (${segundos}s)`;
             document.getElementById('adModal').classList.add('active');
 
             let timer = setInterval(() => {
                 segundos--;
                 if (segundos > 0) {
-                    btnContinue.innerText = `Por favor espera (${segundos}s)`;
+                    btn.innerText = `Por favor espera (${segundos}s)`;
                 } else {
                     clearInterval(timer);
-                    btnContinue.disabled = false;
-                    btnContinue.classList.add('ready');
-                    btnContinue.innerText = "Ir a la Descarga";
+                    btn.disabled = false;
+                    btn.classList.add('ready');
+                    btn.innerText = "Ir a la Descarga";
                 }
             }, 1000);
         }
@@ -102,11 +101,13 @@
             if (!btn.disabled) {
                 document.getElementById('adModal').classList.remove('active');
                 
-                // Abrir el anuncio
+                // 1. Abrir anuncio en ventana nueva
                 window.open(URL_SMARTLINK_MONETAG, '_blank');
                 
-                // Abrir la descarga en nueva pestaña para evitar el error 404 en GitHub Pages
-                window.open(urlDescargaFinal, '_blank');
+                // 2. Forzar descarga mediante el enlace oculto para evitar 404
+                const linkOculto = document.getElementById('linkDescargaReal');
+                linkOculto.href = urlDescargaFinal;
+                linkOculto.click();
             }
         });
     </script>
